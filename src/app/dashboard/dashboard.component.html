@@ -1,0 +1,50 @@
+<div *ngIf="auth.user | async as user; then loggedin else loggedout">
+
+</div>
+
+<ng-template #loggedin>
+  <div *ngIf="auth.user | async as user;" class="content">
+    <h2>Today I'm</h2>
+    <div *ngIf="editing; then editingFocus else viewingFocus"></div>
+
+    <ng-template #viewingFocus>
+      <div class="focus-container">
+        <h2 class="focus" (click)="editing = true">{{ user.focus?.text }}</h2>
+
+        <button mat-raised-button color="primary" *ngIf="!user.focus?.done" (click)="achieveGoal()">Achieve Goal</button>
+      </div>
+    </ng-template>
+
+    <ng-template #editingFocus>
+      <div class="focus-container">
+        <form #focusForm="ngForm" (ngSubmit)="updateFocus(focusForm)" *ngIf="editingFocus">
+          <mat-form-field class="big">
+            <input matInput placeholder="What's your focus for today?" required [ngModel]="user.focus?.text" name="focus">
+          </mat-form-field>
+        </form>
+      </div>
+    </ng-template>
+
+    <h2>For</h2>
+
+    <div *ngIf="editing; then editingHours else viewingHours"></div>
+
+    <ng-template #viewingHours>
+      <div class="focus-container hours">
+        <h2 class="focus working-hours">{{ user.working_hours }}</h2>
+        <h2>Hours</h2>
+      </div>
+    </ng-template>
+
+    <ng-template #editingHours>
+
+    </ng-template>
+  </div>
+</ng-template>
+
+<ng-template #loggedout>
+ <div class="content">
+   <h2 class="mat-display-3">Let's get started!</h2>
+   <button mat-button mat-raised-button color="primary" (click)="auth.googleLogin()">Login</button>
+ </div>
+</ng-template>

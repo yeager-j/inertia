@@ -4,5 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyBzjvMIP16EHrJwPIh0tWfCPdzrUkDaX7c',
+    authDomain: 'inertia-a2159.firebaseapp.com',
+    databaseURL: 'https://inertia-a2159.firebaseio.com',
+    projectId: 'inertia-a2159',
+    storageBucket: 'inertia-a2159.appspot.com',
+    messagingSenderId: '246408127775'
+  }
 };
